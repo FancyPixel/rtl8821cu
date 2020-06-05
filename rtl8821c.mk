@@ -10,6 +10,20 @@ ifeq ($(CONFIG_SDIO_HCI), y)
 FILE_NAME = 8821cs
 endif
 
+ifeq ($(CONFIG_PLATFORM_NV_TK1), n)
+	ifeq ($(CONFIG_PLATFORM_RTK129X), n)
+	ifeq ($(CONFIG_PLATFORM_ARM_RPI), n)
+	ifeq ($(CONFIG_PLATFORM_ARM_RPI3), n)
+	ifeq ($(CONFIG_MP_INCLUDED), y)
+	### 8821C Default Enable VHT MP HW TX MODE ###
+	EXTRA_CFLAGS += -DCONFIG_MP_VHT_HW_TX_MODE
+	CONFIG_MP_VHT_HW_TX_MODE = y
+endif
+endif
+endif
+endif
+endif
+
 _HAL_INTFS_FILES +=	hal/rtl8821c/rtl8821c_halinit.o \
 			hal/rtl8821c/rtl8821c_mac.o \
 			hal/rtl8821c/rtl8821c_cmd.o \
